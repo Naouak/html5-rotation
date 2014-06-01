@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Device Orientation Test</title>
+
+    <style type="text/css">
+        html, body{
+            width: 100%;
+            height: 100%;
+        }
+
+        .box{
+            font-size: 100px;
+            font-weight: bold;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: red;
+            text-align: center;
+            transform-origin: center center;
+            transform: rotateZ(90deg)
+        }
+    </style>
+</head>
+<body>
+    <div id="output"></div>
+
+    <iframe class="box" src="//www.youtube.com/embed/vO3fTTSOTU4?autoplay=1"></iframe>
+
+    <script type="text/javascript">
+        var handleOrientation = function(event){
+
+              var rotation = event;
+            document.getElementById("output").innerHTML =
+                    "alpha: "+rotation.alpha+"<br />"+
+                    "beta: "+rotation.beta+"<br />"+
+                    "gamma: "+rotation.gamma+"<br />"
+            ;
+            document.querySelector(".box").style.transform =
+                [
+                    "rotateZ("+rotation.alpha+"deg)",
+                    "rotateX("+rotation.gamma+"deg)",
+                    "rotateY("+rotation.beta+"deg)"
+                ].join(" ")
+            ;
+        };
+
+        window.addEventListener("deviceorientation", handleOrientation, false);
+    </script>
+
+</body>
+</html>
